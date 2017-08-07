@@ -1,0 +1,185 @@
+@import 'normalize'
+@import 'font'
+
+$dark: #212121
+$light: #FAFAFA
+$green: hsl(100, 91.9%, 29%)
+//#388E3C
+
+=circle($radius, $border-width, $color)
+  height: $radius
+  width: $radius
+  border-radius: 50%
+  border: $border-width solid $color
+  display: flex
+  justify-content: center
+  align-items: center
+
+
+body
+  background-color: $dark
+  color: $light
+  font-family: 'Cabin', sans-serif
+  .hidden
+    display: none!important
+  .container
+    height: 100vh
+    position: relative
+    .modalToggler
+      +circle(2rem, 1px, $light)
+      background-color: $light
+      color: $dark
+      cursor: pointer
+      transition: 300ms ease-in-out
+      z-index: 10000
+      position: absolute
+      top: 20px
+      right: 20px
+      &:hover
+        background-color: $dark
+        color: $light
+    #help.modal
+      z-index: 20000
+      color: $dark
+      .modal-header
+        h4#helpModalLabel
+          width: 100%
+          text-align: center
+          color: lighten($dark, 25)
+      .modal-body
+        i
+          margin: 0 5px
+        p.attention
+          padding-top: 20px
+        p.thanks
+          margin: 0
+
+    .main-title
+      padding-top: 2rem
+      position: relative
+      z-index: -10
+      h1
+        margin: 0
+        font-size: 3em
+        text-shadow: 2px 2px $dark
+
+    main
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      .main-button
+        margin: 30px 0
+        display: flex
+        justify-content: center
+        align-items: center
+        .control-button
+          +circle(5.5rem, 1px, $light)
+          font-size: 2rem
+          &.start-button
+            position: relative
+            padding-left: 5px
+            i
+          &:hover
+            background-color: $light
+            color: $dark
+
+      .main-timer
+        margin: auto
+        position: relative
+        box-sizing: content-box
+        +circle(24rem, 2px, $green)
+        transition: 500ms ease
+        &:hover
+          cursor: pointer
+          & > .control-wrapper
+            opacity: 0.8
+        #timer
+          font-size: 4.5rem
+        .control-wrapper
+          +circle(24rem, 0px, transparent)
+          transition: all 300ms ease-in-out
+          opacity: 0
+          position: absolute
+          i.fa.fa-play
+            padding-left: 15px
+          &.paused
+            opacity: 0.8
+            &:hover
+              i.fa.fa-pause
+                display: none
+              i.fa.fa-play
+                display: block
+          &.stopped
+            opacity: 0.5
+            i.fa.fa-pause
+              display: none
+            &:hover
+              i.fa.fa-play
+                display: block!important
+          i
+            font-size: 7rem
+
+      .counters-container
+        width: 30rem
+        margin: 5rem auto 0 auto
+        display: flex
+        justify-content: center
+        .counter
+          +circle(12rem, 1px, $light)
+          position: relative
+          &.break-counter
+            margin-right: 6rem
+          .timer
+            font-size: 2.5rem
+          .control-button
+            position: absolute
+            +circle(4rem, 1px, $light)
+            background-color: $dark
+            color: $light
+            text-decoration: none
+            transition: all 300ms ease-in-out
+            &:hover
+              background-color: $light
+              color: $dark
+          .add
+            right: -2rem
+          .substract
+            left: -2rem
+          .icon
+            +circle(4.5rem, 1px, $light)
+            position: absolute
+            top: -2.25rem
+            background-color: $dark
+            color: $light
+            &.active
+              background-color: $light
+              color: $dark
+            i
+              font-size: 1.8rem
+              &.fa-clock-o
+                font-size: 2.25rem
+
+@media only screen and (max-width: 360px)
+  html
+    font-size: 8px
+
+@media only screen and (max-width: 560px)
+  html
+    font-size: 10px
+
+@media only screen and (max-width: 768px)
+  html body .container
+    .modalToggler:hover
+      background-color: $light
+      color: $dark
+    main
+      .main-button
+        .control-button:hover
+          background-color: $dark
+          color: $light
+      .main-timer
+        &:hover > .control-wrapper
+          opacity: 0
+        .control-wrapper
+          transition: none
